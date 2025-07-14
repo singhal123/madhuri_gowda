@@ -1,6 +1,0 @@
-HETATM    1  C   UNK     1       0.000   0.000   0.000
-HETATM    2  H1  UNK     1       0.629   0.629   0.629
-HETATM    3  H2  UNK     1      -0.629  -0.629   0.629
-HETATM    4  H3  UNK     1      -0.629   0.629  -0.629
-HETATM    5  H4  UNK     1       0.629  -0.629  -0.629
-END
