@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Organic Molecule Visualizer</title>
+
+  <!-- 3Dmol.js -->
+  <script defer src="https://3Dmol.org/build/3Dmol-min.js"></script>
+
+  <style>
+    /* ---------- BASE LAYOUT ---------- */
+    html, body { margin:0; font-family:Arial, sans-serif; }
+    .app {
+      display:grid;
+      grid-template-columns:240px 1fr;   /* sidebar | viewer */
+      column-gap:16px;                   /* space between boxes */
+      height:460px;                      /* reduced height */
+      padding:16px;                      /* outside padding */
+      box-sizing:border-box;
+    }
+
+    /* ---------- SIDEBAR ---------- */
+    .sidebar{
+      background:#f5f5f5;
+      padding:24px 18px;
+      box-sizing:border-box;
+      border-radius:10px;
+      display:flex;
+      flex-direction:column;
+    }
+    .sidebar h2   {font-size:18px; margin:0 0 14px;}
+    .sidebar select{width:100%; padding:8px 10px; font-size:16px;}
+
+    /* ---------- VIEWER ---------- */
+    .viewer-wrap{
+      position:relative;
+      border-radius:10px;
+      overflow:hidden;                   /* clip viewer corners */
+    }
+    #viewer{
+      position:absolute; inset:0;
+      border:1px solid #ccc;
+      border-radius:10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Select a molecule</h2>
+    <select id="molecule-select">
+      <option value="">— loading —</option>
+    </select>
+  </div>
+
+  <!-- Viewer -->
+  <div class="viewer-wrap">
+    <div id="viewer"></div>
+  </div>
+
+</div>
+
+<script>
+/* -------------------------------------------------------------
+   1.  Discover all *.pdb files in /molecules
+------------------------------------------------------------- */
+async function listPDBs() {
+
+  /* GitHub Pages environment → use GitHub API */
+  if (location.hostname.endsWith('.github.io')) {
+    const owner = location.hostname.split('.')[0];
+    const repo  = location.pathname.split('/')[1] || 'madhuri_gowda';
+    const api   = `https://api.github.com/repos/${owner}/${repo}/contents/molecules`;
+
+    try {
+      const res = await fetch(api);
+      if (res.ok){
+        return (await res.json())
+          .filter(f=>f.name.endsWith('.pdb'))
+          .map(f=>f.name.replace('.pdb',''));
+      }
+    }catch(e){ console.warn('GitHub API failed',e); }
+  }
+
+  /* Localhost dir listing via python http.server */
+  try{
+    const res = await fetch('molecules/');
+    if (res.ok){
+      const html = await res.text();
+      return [...html.matchAll(/href="([^"]+\.pdb)"/gi)]
+              .map(m=>m[1].replace(/.*\//,'').replace('.pdb',''));
+    }
+  }catch(e){ console.warn('Local dir listing failed',e); }
+
+  return [];
+}
+
+/* -------------------------------------------------------------
+   2.  Init dropdown + 3Dmol viewer
+------------------------------------------------------------- */
+window.addEventListener('DOMContentLoaded', async ()=>{
+
+  const select = document.getElementById('molecule-select');
+  const viewer = $3Dmol.createViewer('viewer',
+                  {backgroundColor:'white', antialias:false});
+
+  /* Populate dropdown automatically */
+  const pdbNames = await listPDBs();
+  select.innerHTML = '<option value="">— Choose —</option>';
+  pdbNames.forEach(name=>{
+    const opt=document.createElement('option');
+    opt.value=name;
+    opt.textContent=name[0].toUpperCase()+name.slice(1);
+    select.appendChild(opt);
+  });
+
+  /* Load selected molecule */
+  select.addEventListener('change', async ()=>{
+    const file = select.value;
+    if(!file) return;
+
+    try{
+      const pdb = await (await fetch(`molecules/${file}.pdb`)).text();
+      viewer.clear();
+      viewer.addModel(pdb,'pdb');
+      viewer.setStyle({}, {stick:{radius:0.15}});  // faster style
+      viewer.zoomTo();
+      viewer.render();
+    }catch(e){
+      alert('Could not load molecule file.');
+      console.error(e);
+    }
+  });
+
+  /* Resize viewer with container */
+  window.addEventListener('resize', ()=>viewer.resize());
+});
+</script>
+
+</body>
+</html>
