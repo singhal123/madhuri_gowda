@@ -2,17 +2,19 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Molecule Visualizer</title>
+  <title>Molecule Quiz – Visualizer</title>
   <script defer src="https://3Dmol.org/build/3Dmol-min.js"></script>
   <style>
     html,body{margin:0;font-family:Arial,sans-serif}
     .app{display:grid;grid-template-columns:240px 1fr;column-gap:16px;height:460px}
     .sidebar{background:#f5f5f5;padding:24px 18px;border-radius:10px;display:flex;flex-direction:column}
     .sidebar h2{font-size:18px;margin:0 0 14px}
-    .sidebar select{width:100%;padding:8px 10px;font-size:16px;margin-bottom:12px}
-    #element-table{width:100%;border-collapse:collapse;font-size:14px;display:none}
+    #refresh-btn{font-size:24px;background:none;border:none;cursor:pointer;margin-bottom:12px}
+    #element-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:4px;display:none}
     #element-table th,#element-table td{border:1px solid #ccc;padding:4px 6px;text-align:center}
     #element-table th{background:#e8e8e8}
+    #options label{display:block;margin:4px 0;font-size:14px;cursor:pointer}
+    #feedback{margin-top:6px;font-weight:bold}
     .viewer-wrap{position:relative;border-radius:10px;overflow:hidden}
     #viewer{position:absolute;inset:0;border:1px solid #ccc;border-radius:10px}
   </style>
@@ -21,83 +23,110 @@
 
 <div class="app">
   <div class="sidebar">
-    <h2>Select a molecule</h2>
-    <select id="molecule-select"><option>— loading —</option></select>
+    <h2>Molecule Quiz</h2>
+    <button id="refresh-btn" title="Load a random molecule">🔄</button>
+
+    <!-- Element-count table -->
     <table id="element-table">
       <thead><tr><th>Element</th><th>Atoms</th></tr></thead>
       <tbody></tbody>
     </table>
+
+    <!-- Quiz UI -->
+    <div id="options" style="margin-top:12px"></div>
+    <p id="feedback"></p>
   </div>
+
   <div class="viewer-wrap"><div id="viewer"></div></div>
 </div>
 
 <script>
-/* -------- discover .mol & .sdf -------- */
+/* ---------- Discover MOL/SDF files ---------- */
 async function listMolFiles(){
-  const accept = f => f.endsWith('.mol') || f.endsWith('.sdf');
+  const ok=f=>/\.mol$|\.sdf$/i.test(f);
 
   if(location.hostname.endsWith('.github.io')){
-    const owner = location.hostname.split('.')[0];
-    const repo  = location.pathname.split('/')[1] || 'madhuri_gowda';
-    const api   = `https://api.github.com/repos/${owner}/${repo}/contents/molecules`;
+    const owner=location.hostname.split('.')[0];
+    const repo =(location.pathname.split('/')[1]||'madhuri_gowda');
     try{
-      const js = await (await fetch(api)).json();
-      return js.filter(x=>accept(x.name)).map(x=>x.name);
-    }catch(e){}
+      const js=await (await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/molecules`)).json();
+      return js.filter(x=>ok(x.name)).map(x=>x.name);
+    }catch{}
   }
   try{
-    const html = await (await fetch('molecules/')).text();
+    const html=await (await fetch('molecules/')).text();
     return [...html.matchAll(/href="([^"]+\.(?:mol|sdf))"/gi)].map(m=>m[1]);
-  }catch(e){}
+  }catch{}
   return [];
 }
 
-/* -------- init viewer ---------- */
-window.addEventListener('DOMContentLoaded', async ()=>{
+/* ---------- Helpers ---------- */
+const base=f=>f.replace(/\.(mol|sdf)$/i,'');
+const shuffle=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
 
-  const sel = document.getElementById('molecule-select');
-  const t   = document.getElementById('element-table');
-  const tb  = t.querySelector('tbody');
-  const v   = $3Dmol.createViewer('viewer',{backgroundColor:'white',antialias:false});
+/* ---------- Init ---------- */
+window.addEventListener('DOMContentLoaded',async()=>{
+  const viewer=$3Dmol.createViewer('viewer',{backgroundColor:'white',antialias:false});
+  const files=await listMolFiles();
+  if(files.length<4){alert('Need at least 4 .mol/.sdf files');return;}
 
-  const files = await listMolFiles();
-  sel.innerHTML='<option value="">— Choose —</option>';
-  files.forEach(f=>{
-    const o=document.createElement('option');
-    o.value=f; o.textContent=f.replace(/\.(mol|sdf)$/,'');
-    sel.appendChild(o);
-  });
+  const btn=document.getElementById('refresh-btn');
+  const optBox=document.getElementById('options');
+  const feedback=document.getElementById('feedback');
+  const table=document.getElementById('element-table');
+  const tbody=table.querySelector('tbody');
 
-  sel.addEventListener('change', async ()=>{
-    const file = sel.value;
-    v.clear(); t.style.display='none'; tb.innerHTML='';
-    if(!file){v.render();return;}
+  async function loadRandom(){
+    /* reset UI */
+    viewer.clear(); viewer.render();      /* ✅ old model gone */
+    feedback.textContent='';
+    table.style.display='none'; tbody.innerHTML='';
+    optBox.innerHTML='Loading…';
 
+    /* choose files */
+    const correctFile=files[Math.floor(Math.random()*files.length)];
+    const correctName=base(correctFile);
+    const wrong=shuffle(files.filter(f=>f!==correctFile)).slice(0,3).map(base);
+    const options=shuffle([correctName,...wrong]);
+
+    /* fetch & render */
     try{
-      const txt = await (await fetch('molecules/'+encodeURIComponent(file))).text();
-      const m   = v.addModel(txt,'sdf');          // parse as sdf/mol V2000
-      if(!m || !m.selectedAtoms().length) throw new Error('parse-fail');
+      const txt=await (await fetch('molecules/'+encodeURIComponent(correctFile))).text();
+      const model=viewer.addModel(txt,'sdf');
+      if(!model.selectedAtoms().length) throw 'bad';
+      viewer.setStyle({}, {stick:{radius:0.15}});
+      viewer.zoomTo(); viewer.render();
 
-      v.setStyle({}, {stick:{radius:0.15}});
-      v.zoomTo(); v.render();
-
-      /* count atoms */
-      const count={};
-      m.selectedAtoms({}).forEach(a=>{
-        const e=a.elem||a.element||a.atomic; count[e]=(count[e]||0)+1;
+      /* element counts */
+      const counts={};
+      model.selectedAtoms({}).forEach(a=>{
+        const e=a.elem||a.element||a.atomic;
+        counts[e]=(counts[e]||0)+1;
       });
-      tb.innerHTML = Object.entries(count)
-       .sort((a,b)=>a[0].localeCompare(b[0]))
-       .map(([e,n])=>`<tr><td>${e}</td><td>${n}</td></tr>`).join('');
-      t.style.display='table';
-
-    }catch(err){
-      alert('Cannot load '+file+' (must be V2000 mol/sdf).');
-      console.error(err);
+      tbody.innerHTML=Object.entries(counts)
+        .sort((a,b)=>a[0].localeCompare(b[0]))
+        .map(([e,n])=>`<tr><td>${e}</td><td>${n}</td></tr>`).join('');
+      table.style.display='table';
+    }catch{
+      optBox.innerHTML='Failed to load.';
+      return;
     }
-  });
 
-  window.addEventListener('resize', ()=>v.resize());
+    /* radio list below table */
+    optBox.innerHTML=options.map(o=>`
+      <label><input type="radio" name="opt" value="${o}"> ${o}</label>
+    `).join('');
+
+    optBox.querySelectorAll('input[name="opt"]').forEach(r=>{
+      r.addEventListener('change',()=>{
+        feedback.textContent=(r.value===correctName)?'✅ Correct!':'❌ Incorrect';
+      });
+    });
+  }
+
+  btn.addEventListener('click',loadRandom);
+  loadRandom();                       /* first load */
+  window.addEventListener('resize',()=>viewer.resize());
 });
 </script>
 </body>
