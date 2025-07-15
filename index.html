@@ -8,14 +8,12 @@
     html,body{margin:0;font-family:Arial,sans-serif}
     .app{display:grid;grid-template-columns:240px 1fr;column-gap:16px;height:460px}
 
-    /* ── Sidebar ── */
+    /* ── sidebar ── */
     .sidebar{background:#f5f5f5;padding:24px 18px;border-radius:10px;display:flex;flex-direction:column}
     .sidebar h2{font-size:18px;margin:0 0 14px}
-
-    /* refresh button */
     #refresh-btn{font-size:18px;background:none;border:none;cursor:pointer;
                  display:flex;align-items:center;gap:6px;margin-bottom:12px}
-    #refresh-btn span{font-size:24px;line-height:1}
+    #refresh-btn span{font-size:24px}
 
     /* element table */
     #element-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:4px;display:none}
@@ -25,9 +23,10 @@
     /* separator */
     .sep{border:0;border-top:1px dashed #aaa;margin:12px 0}
 
-    /* quiz options & feedback */
+    /* quiz */
     #qtext{margin:6px 0 4px;font-size:14px;font-weight:600}
     #options label{display:block;margin:4px 0;font-size:14px;cursor:pointer}
+    #options label.disabled{color:#777;cursor:default}
     #feedback{margin-top:6px;font-weight:bold}
 
     /* viewer */
@@ -40,7 +39,7 @@
 <div class="app">
   <div class="sidebar">
     <h2>Molecule Quiz</h2>
-    <button id="refresh-btn" title="Load a random molecule"><span>🔄</span>Reload Quiz</button>
+    <button id="refresh-btn"><span>🔄</span>Reload&nbsp;Quiz</button>
 
     <!-- element table -->
     <table id="element-table">
@@ -48,9 +47,9 @@
       <tbody></tbody>
     </table>
 
-    <hr class="sep">               <!-- decorative separator -->
+    <hr class="sep">
 
-    <!-- quiz UI -->
+    <!-- quiz -->
     <p id="qtext" style="display:none">Which molecule is shown?</p>
     <div id="options"></div>
     <p id="feedback"></p>
@@ -60,7 +59,7 @@
 </div>
 
 <script>
-/* ---------- list MOL/SDF ---------- */
+/* --------- list molecule files ---------- */
 async function listMolFiles(){
   const ok=f=>/\.mol$|\.sdf$/i.test(f);
   if(location.hostname.endsWith('.github.io')){
@@ -78,11 +77,11 @@ async function listMolFiles(){
   return [];
 }
 
-/* ---------- helpers ---------- */
+/* -------- helpers -------- */
 const base=f=>f.replace(/\.(mol|sdf)$/i,'');
 const shuffle=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
 
-/* ---------- main ---------- */
+/* -------- main -------- */
 window.addEventListener('DOMContentLoaded',async()=>{
   const viewer=$3Dmol.createViewer('viewer',{backgroundColor:'white',antialias:false});
   const files=await listMolFiles();
@@ -96,9 +95,10 @@ window.addEventListener('DOMContentLoaded',async()=>{
   const tbody=table.querySelector('tbody');
 
   async function loadRandom(){
+    /* reset UI */
     viewer.clear();viewer.render();
     feedback.textContent=''; qtext.style.display='none';
-    table.style.display='none';tbody.innerHTML='';
+    table.style.display='none'; tbody.innerHTML='';
     optBox.innerHTML='Loading…';
 
     const correctFile=files[Math.floor(Math.random()*files.length)];
@@ -119,19 +119,29 @@ window.addEventListener('DOMContentLoaded',async()=>{
         counts[e]=(counts[e]||0)+1;
       });
       tbody.innerHTML=Object.entries(counts)
-        .sort((a,b)=>a[0].localeCompare(b[0]))
-        .map(([e,n])=>`<tr><td>${e}</td><td>${n}</td></tr>`).join('');
+       .sort((a,b)=>a[0].localeCompare(b[0]))
+       .map(([e,n])=>`<tr><td>${e}</td><td>${n}</td></tr>`).join('');
       table.style.display='table';
     }catch{optBox.innerHTML='Failed to load.';return;}
 
-    /* render quiz */
+    /* build quiz */
     qtext.style.display='block';
     optBox.innerHTML=options.map(o=>`
       <label><input type="radio" name="opt" value="${o}"> ${o}</label>
     `).join('');
+
+    /* single-shot answer */
+    let answered=false;
     optBox.querySelectorAll('input[name="opt"]').forEach(r=>{
       r.addEventListener('change',()=>{
-        feedback.textContent=(r.value===correctName)?'✅ Correct!':'❌ Incorrect';
+        if(answered) return;
+        answered=true;
+        const correct=r.value===correctName;
+        feedback.textContent= correct ? '✅ Correct!' : '❌ Incorrect';
+        /* disable all radios */
+        optBox.querySelectorAll('input[name="opt"]').forEach(x=>x.disabled=true);
+        /* dim labels */
+        optBox.querySelectorAll('label').forEach(l=>l.classList.add('disabled'));
       });
     });
   }
