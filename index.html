@@ -6,13 +6,19 @@
   <script defer src="https://3Dmol.org/build/3Dmol-min.js"></script>
   <style>
     html,body{margin:0;font-family:Arial,sans-serif}
-    .app{display:grid;grid-template-columns:240px 1fr;column-gap:16px;height:460px}
+
+    /* ─── DESKTOP GRID ─── */
+    .app{
+      display:grid;
+      grid-template-columns:300px 1fr;   /* ◄ wider sidebar */
+      column-gap:16px;
+      height:460px;
+    }
 
     /* ── sidebar ── */
     .sidebar{background:#f5f5f5;padding:24px 18px;border-radius:10px;display:flex;flex-direction:column}
     .sidebar h2{font-size:18px;margin:0 0 14px}
-    #refresh-btn{font-size:18px;background:none;border:none;cursor:pointer;
-                 display:flex;align-items:center;gap:6px;margin-bottom:12px}
+    #refresh-btn{font-size:18px;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:6px;margin-bottom:12px}
     #refresh-btn span{font-size:24px}
 
     /* element table */
@@ -32,6 +38,18 @@
     /* viewer */
     .viewer-wrap{position:relative;border-radius:10px;overflow:hidden}
     #viewer{position:absolute;inset:0;border:1px solid #ccc;border-radius:10px}
+
+    /* ─── MOBILE STACK ─── */
+    @media (max-width:700px){
+      .app{
+        grid-template-columns:1fr;      /* single column */
+        height:auto;                    /* let content decide */
+      }
+      .viewer-wrap{
+        height:320px;                   /* fixed viewer height under sidebar */
+        margin-top:16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -95,7 +113,6 @@ window.addEventListener('DOMContentLoaded',async()=>{
   const tbody=table.querySelector('tbody');
 
   async function loadRandom(){
-    /* reset UI */
     viewer.clear();viewer.render();
     feedback.textContent=''; qtext.style.display='none';
     table.style.display='none'; tbody.innerHTML='';
@@ -124,23 +141,18 @@ window.addEventListener('DOMContentLoaded',async()=>{
       table.style.display='table';
     }catch{optBox.innerHTML='Failed to load.';return;}
 
-    /* build quiz */
     qtext.style.display='block';
     optBox.innerHTML=options.map(o=>`
       <label><input type="radio" name="opt" value="${o}"> ${o}</label>
     `).join('');
 
-    /* single-shot answer */
     let answered=false;
     optBox.querySelectorAll('input[name="opt"]').forEach(r=>{
       r.addEventListener('change',()=>{
         if(answered) return;
         answered=true;
-        const correct=r.value===correctName;
-        feedback.textContent= correct ? '✅ Correct!' : '❌ Incorrect';
-        /* disable all radios */
+        feedback.textContent = (r.value===correctName)?'✅ Correct!':'❌ Incorrect';
         optBox.querySelectorAll('input[name="opt"]').forEach(x=>x.disabled=true);
-        /* dim labels */
         optBox.querySelectorAll('label').forEach(l=>l.classList.add('disabled'));
       });
     });
