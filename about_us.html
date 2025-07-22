@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Chemistry by Madhuri Gowda</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    /* About Section */
+    .about-section {
+      display: flex;
+      flex-wrap: wrap;
+      background-color: #f0f0f0;
+    }
+
+    .about-image {
+      flex: 1 1 40%;
+      min-height: 400px;
+      background-image: url('./images/about_us.jpeg');
+      background-size: cover;
+      background-position: center top;
+    }
+
+    .about-content {
+      flex: 1 1 60%;
+      background-color: #1565c0;
+      color: white;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    .about-content h1 {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .about-content p {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    /* Curriculum Section */
+    .curriculum-section {
+      background-color: #61a3ed;
+      padding: 40px 20px;
+    }
+
+    .curriculum-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      background-color: #f9f9f9;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 1400px;
+      margin: auto;
+    }
+
+    .curriculum-box {
+      background-color: #fff;
+      padding: 20px 25px;
+      border-radius: 10px;
+      flex: 1 1 320px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .curriculum-box h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+
+    .indian { background-color: #512da8; }
+    .international { background-color: #1976d2; }
+
+    .curriculum-box ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .curriculum-box li {
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    /* Offerings Section */
+    .offer-section {
+      padding: 60px 20px;
+      background-color: #eaeaea;
+      color: #000;
+    }
+
+    .offer-section h1 {
+      font-size: 32px;
+      letter-spacing: 4px;
+      font-weight: bold;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin-bottom: 10px;
+    }
+
+    .offer-underline {
+      border-bottom: 2px solid #000;
+      width: 60px;
+      margin: 0 auto 40px auto;
+    }
+
+    .offer-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .offer-col {
+      width: 45%;
+      min-width: 300px;
+    }
+
+    .offer-col h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .offer-col p {
+      margin-top: 10px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background-image: linear-gradient(0deg, rgb(255, 57, 25), rgb(249, 168, 37));
+      color: white;
+      padding: 60px 20px;
+    }
+
+    .contact-container {
+      max-width: 900px;
+      margin: auto;
+      text-align: left;
+    }
+
+    .contact-container h2 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .contact-container p {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .button-group {
+      margin: 20px 0;
+    }
+
+    .button-group a {
+      display: inline-block;
+      margin-right: 12px;
+      padding: 10px 22px;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 23px;
+      background-color: rgb(69, 39, 160);
+      color: #fff;
+      border: 1px solid rgb(40, 53, 147);
+    }
+
+    @media (max-width: 768px) {
+      .about-section {
+        flex-direction: column;
+      }
+
+      .about-image {
+        min-height: 300px;
+      }
+
+      .about-content {
+        padding: 20px;
+      }
+
+      .offer-col {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- About Section -->
+  <div class="about-section">
+    <div class="about-image"></div>
+    <div class="about-content">
+      <h1>Chemistry by Madhuri Gowda</h1>
+      <p>
+        I am Madhuri Gowda, the face behind “Chemistry by Madhuri Gowda”, and a seasoned Chemistry educator with over a decade of teaching experience.
+        I specialize in delivering structured, curriculum-aligned Chemistry instruction to students from Grades 8 to 12, across both Indian and international educational boards.
+        <br><br>
+        My academic journey has allowed me to mentor learners from India, Germany, Canada, the United States, Australia, Dubai, and Hong Kong—many of whom have gone on to earn positions on the Honour Roll, receive academic excellence awards, and consistently perform in the top percentiles of their respective boards and schools.
+      </p>
+    </div>
+  </div>
+
+  <!-- Curriculum Section -->
+  <div class="curriculum-section">
+    <div class="curriculum-container">
+      <div class="curriculum-box">
+        <h3 class="indian">🇮🇳 Indian Curricula (Grades 8–12)</h3>
+        <ul>
+          <li>🧪 ICSE (Grades 8 to 10)</li>
+          <li>🧪 CBSE (Grades 8 to 12)</li>
+          <li>🧪 ISC (Grades 11 and 12)</li>
+          <li>🧪 PUC (Grades 11 and 12 – Karnataka & other states)</li>
+          <li>🧪 Competitive Exams – JEE (Main/Advanced) and NEET</li>
+          <li>➡️ Emphasis on concept-building, application-based learning, and numerical problem-solving</li>
+        </ul>
+      </div>
+
+      <div class="curriculum-box">
+        <h3 class="international">🌍 International Curricula (Grades 8–12)</h3>
+        <ul>
+          <li>🧪 IGCSE – Core & Extended Chemistry</li>
+          <li>🧪 AS and A Level – Cambridge / Edexcel / Oxford AQA</li>
+          <li>🧪 USA Curriculum – General, Honors, AP Chemistry</li>
+          <li>🧪 Canadian Curriculum – Nova Scotia, Ontario, BC</li>
+          <li>🧪 Australian Curriculum – National & State-specific</li>
+          <li>🧪 German Curriculum – Grades 8–11 with bilingual support</li>
+          <li>🧪 British Curriculum (Dubai, HK) – IGCSE, AS, A Levels</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offerings Section -->
+  <div class="offer-section">
+    <h1>What I Offer</h1>
+    <div class="offer-underline"></div>
+    <div class="offer-row">
+      <div class="offer-col">
+        <h2 style="color: #ed493e;">01</h2>
+        <p>Syllabus-specific notes, mind maps, tests, worksheets, and assessments</p>
+      </div>
+      <div class="offer-col">
+        <h2 style="color: #3eeda1;">02</h2>
+        <p>Intensive practice on reaction mechanisms, conversions, and stoichiometry</p>
+      </div>
+      <div class="offer-col">
+        <h2 style="color: #3ee7ed;">03</h2>
+        <p>Emphasis on critical thinking, lab-based understanding, and exam technique</p>
+      </div>
+      <div class="offer-col">
+        <h2 style="color: #ed3e9b;">04</h2>
+        <p>Board-specific question sets: MCQs, Assertion-Reasoning, Case-Based, Short/Long Answer</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="contact-section">
+    <div class="contact-container">
+      <h2>Let’s Get in Touch</h2>
+      <p>Explore the curriculum or register directly — let’s make chemistry your strength.</p>
+      <div class="button-group">
+        <a href="s/store">Explore Curriculum</a>
+        <a href="/contactus">Register Now</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
