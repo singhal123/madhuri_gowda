@@ -17,6 +17,45 @@
       max-width: 100%;
       margin: 0;
       padding: 40px 20px;
+      position: relative;
+    }
+
+    /* Section Backgrounds */
+    .section-indian {
+      background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .section-international {
+      background: linear-gradient(135deg, #fff3e0, #fce4ec);
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .section-competitive {
+      background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Section Separator */
+    .section-separator {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ddd, transparent);
+      margin: 50px auto;
+      width: 60%;
+      border-radius: 1px;
+    }
+
+    /* Accordion Container */
+    .accordion-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
 
     /* Section Header */
@@ -168,6 +207,10 @@
         padding: 30px 15px;
       }
 
+      .accordion-container {
+        padding: 0 10px;
+      }
+
       .section-header h1 {
         font-size: 26px;
       }
@@ -198,6 +241,10 @@
     @media (max-width: 480px) {
       .container {
         padding: 20px 10px;
+      }
+
+      .accordion-container {
+        padding: 0 5px;
       }
 
       .section-header h1 {
@@ -234,14 +281,15 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container section-indian">
   <!-- Section Header -->
   <div class="section-header">
     <h1>Section 1: Indian Curriculum Courses</h1>
     <div class="underline"></div>
   </div>
 
-  <!-- ICSE Chemistry Accordion -->
+  <div class="accordion-container">
+    <!-- ICSE Chemistry Accordion -->
   <div class="accordion">
     <div class="accordion-header" onclick="toggleAccordion(this)">
       <div class="accordion-title">ICSE Chemistry (Grade VIII to X)</div>
@@ -353,15 +401,19 @@
 
 </div>
 
+<!-- Section Separator -->
+<div class="section-separator"></div>
+
 <!-- Section 2: International Curriculum Courses -->
-<div class="container">
+<div class="container section-international">
   <!-- Section Header -->
   <div class="section-header">
     <h1>Section 2: International Curriculum Courses</h1>
     <div class="underline"></div>
   </div>
 
-  <!-- IGCSE Chemistry Accordion -->
+  <div class="accordion-container">
+    <!-- IGCSE Chemistry Accordion -->
   <div class="accordion">
     <div class="accordion-header" onclick="toggleAccordion(this)">
       <div class="accordion-title">IGCSE Chemistry (Cambridge/Edexcel)</div>
@@ -495,15 +547,19 @@
 
 </div>
 
+<!-- Section Separator -->
+<div class="section-separator"></div>
+
 <!-- Section 3: Competitive Exam Courses -->
-<div class="container">
+<div class="container section-competitive">
   <!-- Section Header -->
   <div class="section-header">
     <h1>Section 3: Competitive Exam Courses</h1>
     <div class="underline"></div>
   </div>
 
-  <!-- JEE Main Chemistry Accordion -->
+  <div class="accordion-container">
+    <!-- JEE Main Chemistry Accordion -->
   <div class="accordion">
     <div class="accordion-header" onclick="toggleAccordion(this)">
       <div class="accordion-title">JEE Main Chemistry</div>
@@ -569,6 +625,7 @@
     </div>
   </div>
 
+  </div>
 </div>
 
 <script>
