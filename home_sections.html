@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Home Sections - Madhuri Gowda</title>
+  <script defer src="https://3Dmol.org/build/3Dmol-min.js"></script>
   <style>
     body {
       margin: 0;
@@ -18,21 +19,17 @@
       background-color: #ffffff;
       text-align: center;
     }
-
     .testimonials-section h2 {
       font-size: 32px;
       font-weight: bold;
       margin-bottom: 10px;
-      color: #333;
     }
-
     .testimonials-section .underline {
       width: 60px;
       height: 3px;
       background-color: #1976d2;
       margin: 0 auto 40px;
     }
-
     .testimonial-grid {
       display: flex;
       flex-wrap: wrap;
@@ -41,7 +38,6 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-
     .testimonial-card {
       background-color: #f0f4ff;
       border-left: 5px solid #1976d2;
@@ -51,17 +47,103 @@
       flex: 1 1 320px;
       text-align: left;
     }
-
     .testimonial-card p {
       font-size: 16px;
       line-height: 1.6;
       margin-bottom: 20px;
     }
-
     .testimonial-author {
       font-weight: bold;
       font-size: 14px;
       color: #444;
+    }
+
+    /* ---------- Molecule Quiz Section ---------- */
+    .app {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      column-gap: 16px;
+      height: 460px;
+      padding: 60px 20px;
+      background-color: #fff;
+    }
+    .sidebar {
+      background: #f5f5f5;
+      padding: 24px 18px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar h2 { font-size: 18px; margin: 0 0 14px }
+    #refresh-btn {
+      font-size: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    #refresh-btn span { font-size: 24px }
+    #element-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 4px;
+      display: none;
+    }
+    #element-table th, #element-table td {
+      border: 1px solid #ccc;
+      padding: 4px 6px;
+      text-align: center;
+    }
+    #element-table th { background: #e8e8e8 }
+    .sep {
+      border: 0;
+      border-top: 1px dashed #aaa;
+      margin: 12px 0;
+    }
+    #qtext {
+      margin: 6px 0 4px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    #options label {
+      display: block;
+      margin: 4px 0;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    #options label.disabled {
+      color: #777;
+      cursor: default;
+    }
+    #feedback {
+      margin-top: 6px;
+      font-weight: bold;
+    }
+    .viewer-wrap {
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    #viewer {
+      position: absolute;
+      inset: 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+
+    @media (max-width: 700px) {
+      .app {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .viewer-wrap {
+        height: 320px;
+        margin-top: 16px;
+      }
     }
 
     /* ---------- Learn With Me Section ---------- */
@@ -70,20 +152,17 @@
       padding: 60px 20px;
       text-align: center;
     }
-
     .learn-section h2 {
       font-size: 32px;
       font-weight: bold;
       margin-bottom: 10px;
     }
-
     .learn-section .underline {
       width: 60px;
       height: 3px;
       background-color: #512da8;
       margin: 0 auto 40px;
     }
-
     .learn-grid {
       display: flex;
       flex-wrap: wrap;
@@ -92,7 +171,6 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-
     .learn-card {
       background-color: #ffffff;
       padding: 30px 25px;
@@ -103,32 +181,25 @@
       position: relative;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
     .learn-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
     }
-
     .learn-card h3 {
       font-size: 18px;
       margin: 10px 0;
-      color: #333;
       font-weight: 600;
     }
-
     .learn-card .step-number {
       font-size: 36px;
       color: #512da8;
       font-weight: bold;
     }
-
     .learn-card p {
       font-size: 15px;
       margin-bottom: 20px;
       color: #555;
-      line-height: 1.6;
     }
-
     .learn-card a {
       display: inline-block;
       padding: 10px 20px;
@@ -140,7 +211,6 @@
       font-weight: bold;
       transition: background 0.3s ease;
     }
-
     .learn-card a:hover {
       background-color: #3b208c;
     }
@@ -149,7 +219,6 @@
       .testimonial-card, .learn-card {
         flex: 1 1 100%;
       }
-
       .testimonials-section h2, .learn-section h2 {
         font-size: 24px;
       }
@@ -158,67 +227,137 @@
 </head>
 <body>
 
-  <!-- Testimonials Section -->
-  <section class="testimonials-section">
-    <h2>Testimonials</h2>
-    <div class="underline"></div>
-
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <p>Madhuri ma’am spotted potential in me when I had none in myself and patiently rebuilt my fundamentals. Her unwavering guidance transformed my confidence and learning. That solid foundation now powers my research at IIT Madras in composites, smart materials, and structural‑health monitoring. I remain deeply grateful to one of the finest teachers I’ve ever had.</p>
-        <div class="testimonial-author">— Mr. Jayanth Gowda</div>
-      </div>
-
-      <div class="testimonial-card">
-        <p>My daughter entered Grade 10 barely knowing chemistry basics, but Madhuri ma’am’s patient coaching transformed her understanding and confidence. Chemistry became a cakewalk—she now enjoys the subject even after choosing a commerce stream. I highly recommend Madhuri ma’am; she turns exam prep into true, lasting knowledge.</p>
-        <div class="testimonial-author">— Parent of Ridhanya, Grade XI</div>
-      </div>
-
-      <div class="testimonial-card">
-        <p>Madhuri Ma’am is a dedicated and approachable educator who made chemistry both understandable and memorable. She taught from the fundamentals, used real-life examples—like comparing reaction time to a running race—and even went to great lengths to perform experiments using simple tools at home, just to help us grasp concepts better. Her commitment to ensuring we were always exam-ready truly set her apart.</p>
-        <div class="testimonial-author">— Shriya Reddy, BTech, MIT Manipal</div>
-      </div>
+<!-- Testimonials -->
+<section class="testimonials-section">
+  <h2>Testimonials</h2>
+  <div class="underline"></div>
+  <div class="testimonial-grid">
+    <div class="testimonial-card">
+      <p>Madhuri ma’am spotted potential in me when I had none in myself and patiently rebuilt my fundamentals...</p>
+      <div class="testimonial-author">— Mr. Jayanth Gowda</div>
     </div>
-  </section>
-
-  <!-- Learn With Me Section -->
-  <section class="learn-section">
-    <h2>Learn With Me</h2>
-    <div class="underline"></div>
-
-    <div class="learn-grid">
-      <div class="learn-card">
-        <div class="step-number">01</div>
-        <h3>Individual Courses</h3>
-        <p>Access single courses tailored to your specific needs. Choose from a wide range of focused topics designed for quick learning and mastery.</p>
-        <a href="#">Explore</a>
-      </div>
-
-      <div class="learn-card">
-        <div class="step-number">02</div>
-        <h3>Course Bundles</h3>
-        <p>Gain a complete understanding of subjects through curated bundles. Save more while covering multiple topics thoroughly and effectively.</p>
-        <a href="#">Explore</a>
-      </div>
-
-      <div class="learn-card">
-        <div class="step-number">03</div>
-        <h3>Membership</h3>
-        <p>Get unlimited access to a wide library of courses at the most cost-effective price, ensuring you have everything you need to excel.</p>
-        <a href="#">Explore</a>
-      </div>
+    <div class="testimonial-card">
+      <p>My daughter entered Grade 10 barely knowing chemistry basics, but Madhuri ma’am’s patient coaching transformed her...</p>
+      <div class="testimonial-author">— Parent of Ridhanya, Grade XI</div>
     </div>
-  </section>
+    <div class="testimonial-card">
+      <p>Madhuri Ma’am is a dedicated and approachable educator who made chemistry both understandable and memorable...</p>
+      <div class="testimonial-author">— Shriya Reddy, BTech, MIT Manipal</div>
+    </div>
+  </div>
+</section>
 
-  <script>
-    function sendHeight() {
-      const height = document.documentElement.scrollHeight;
-      parent.postMessage({ type: 'setIframeHeight', height }, '*');
-    }
-    window.addEventListener('load', sendHeight);
-    window.addEventListener('resize', sendHeight);
-    setInterval(sendHeight, 1000);
-  </script>
+<!-- Molecule Quiz Section -->
+<div class="app">
+  <div class="sidebar">
+    <h2>Molecule Quiz</h2>
+    <button id="refresh-btn"><span>🔄</span>Reload&nbsp;Quiz</button>
+    <table id="element-table"><thead><tr><th>Element</th><th>Atoms</th></tr></thead><tbody></tbody></table>
+    <hr class="sep">
+    <p id="qtext" style="display:none">Which molecule is shown?</p>
+    <div id="options"></div>
+    <p id="feedback"></p>
+  </div>
+  <div class="viewer-wrap"><div id="viewer"></div></div>
+</div>
+
+<!-- Learn With Me Section -->
+<section class="learn-section">
+  <h2>Learn With Me</h2>
+  <div class="underline"></div>
+  <div class="learn-grid">
+    <div class="learn-card">
+      <div class="step-number">01</div>
+      <h3>Individual Courses</h3>
+      <p>Access single courses tailored to your specific needs. Choose from a wide range of focused topics designed for quick learning and mastery.</p>
+      <a href="#">Explore</a>
+    </div>
+    <div class="learn-card">
+      <div class="step-number">02</div>
+      <h3>Course Bundles</h3>
+      <p>Gain a complete understanding of subjects through curated bundles. Save more while covering multiple topics thoroughly and effectively.</p>
+      <a href="#">Explore</a>
+    </div>
+    <div class="learn-card">
+      <div class="step-number">03</div>
+      <h3>Membership</h3>
+      <p>Get unlimited access to a wide library of courses at the most cost-effective price, ensuring you have everything you need to excel.</p>
+      <a href="#">Explore</a>
+    </div>
+  </div>
+</section>
+
+<script>
+/* 3Dmol Molecule Quiz Script */
+async function listMolFiles(){
+  const ok=f=>/\.mol$|\.sdf$/i.test(f);
+  if(location.hostname.endsWith('.github.io')){
+    const owner=location.hostname.split('.')[0];
+    const repo=(location.pathname.split('/')[1]||'madhuri_gowda');
+    try{
+      const js=await (await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/molecules`)).json();
+      return js.filter(x=>ok(x.name)).map(x=>x.name);
+    }catch{}
+  }
+  try{
+    const html=await (await fetch('molecules/')).text();
+    return [...html.matchAll(/href="([^"]+\.(?:mol|sdf))"/gi)].map(m=>m[1]);
+  }catch{}
+  return [];
+}
+const base=f=>f.replace(/\.(mol|sdf)$/i,'');
+const shuffle=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+window.addEventListener('DOMContentLoaded',async()=>{
+  const viewer=$3Dmol.createViewer('viewer',{backgroundColor:'white'});
+  const files=await listMolFiles();
+  if(files.length<4){alert('Need at least 4 MOL/SDF files');return;}
+  const btn=document.getElementById('refresh-btn');
+  const qtext=document.getElementById('qtext');
+  const optBox=document.getElementById('options');
+  const feedback=document.getElementById('feedback');
+  const table=document.getElementById('element-table');
+  const tbody=table.querySelector('tbody');
+
+  async function loadRandom(){
+    viewer.clear();viewer.render();
+    feedback.textContent='';qtext.style.display='none';
+    table.style.display='none';tbody.innerHTML='';optBox.innerHTML='Loading…';
+    const correctFile=files[Math.floor(Math.random()*files.length)];
+    const correctName=base(correctFile);
+    const wrong=shuffle(files.filter(f=>f!==correctFile)).slice(0,3).map(base);
+    const options=shuffle([correctName,...wrong]);
+    try{
+      const txt=await (await fetch('molecules/'+encodeURIComponent(correctFile))).text();
+      const m=viewer.addModel(txt,'sdf');
+      if(!m.selectedAtoms().length) throw 'bad';
+      viewer.setStyle({}, {stick:{radius:0.15}});
+      viewer.zoomTo();viewer.render();
+      const counts={};
+      m.selectedAtoms({}).forEach(a=>{
+        const e=a.elem||a.element||a.atomic;
+        counts[e]=(counts[e]||0)+1;
+      });
+      tbody.innerHTML=Object.entries(counts).sort().map(([e,n])=>`<tr><td>${e}</td><td>${n}</td></tr>`).join('');
+      table.style.display='table';
+    }catch{optBox.innerHTML='Failed to load.';return;}
+    qtext.style.display='block';
+    optBox.innerHTML=options.map(o=>`<label><input type="radio" name="opt" value="${o}"> ${o}</label>`).join('');
+    let answered=false;
+    optBox.querySelectorAll('input[name="opt"]').forEach(r=>{
+      r.addEventListener('change',()=>{
+        if(answered) return;
+        answered=true;
+        feedback.textContent = (r.value===correctName)?'✅ Correct!':'❌ Incorrect';
+        optBox.querySelectorAll('input[name="opt"]').forEach(x=>x.disabled=true);
+        optBox.querySelectorAll('label').forEach(l=>l.classList.add('disabled'));
+      });
+    });
+  }
+  btn.addEventListener('click',loadRandom);
+  loadRandom();
+  window.addEventListener('resize',()=>viewer.resize());
+});
+</script>
 
 </body>
 </html>
