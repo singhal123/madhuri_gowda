@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Curriculum Sections - Madhuri Gowda</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Section Header */
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-header h1 {
+      font-size: 32px;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-header .underline {
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, #1976d2, #42a5f5);
+      margin: 0 auto;
+      border-radius: 2px;
+    }
+
+    /* Accordion Styles */
+    .accordion {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 1px solid #e0e0e0;
+      transition: all 0.3s ease;
+    }
+
+    .accordion:hover {
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .accordion-header {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 20px 25px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .accordion-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .accordion-header:hover::before {
+      left: 100%;
+    }
+
+    .accordion-header:hover {
+      background: linear-gradient(135deg, #5a6fd8, #6a4190);
+    }
+
+    .accordion-title {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .accordion-icon {
+      font-size: 24px;
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .accordion.active .accordion-icon {
+      transform: rotate(180deg);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background-color: #ffffff;
+    }
+
+    .accordion.active .accordion-content {
+      max-height: 500px;
+    }
+
+    .accordion-body {
+      padding: 30px 25px;
+      line-height: 1.6;
+    }
+
+    .accordion-body h3 {
+      color: #2c3e50;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .accordion-body p {
+      margin-bottom: 20px;
+      color: #555;
+      font-size: 15px;
+    }
+
+    .features-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .features-list li {
+      padding: 8px 0;
+      position: relative;
+      padding-left: 30px;
+      color: #444;
+      font-size: 15px;
+    }
+
+    .features-list li::before {
+      content: '✅';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      font-size: 16px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 20px 15px;
+      }
+
+      .section-header h1 {
+        font-size: 26px;
+      }
+
+      .accordion-header {
+        padding: 18px 20px;
+        font-size: 16px;
+      }
+
+      .accordion-body {
+        padding: 25px 20px;
+      }
+
+      .accordion-body h3 {
+        font-size: 15px;
+      }
+
+      .accordion-body p {
+        font-size: 14px;
+      }
+
+      .features-list li {
+        font-size: 14px;
+        padding-left: 25px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 15px 10px;
+      }
+
+      .section-header h1 {
+        font-size: 22px;
+      }
+
+      .accordion-header {
+        padding: 15px 18px;
+        font-size: 15px;
+      }
+
+      .accordion-icon {
+        font-size: 20px;
+      }
+
+      .accordion-body {
+        padding: 20px 18px;
+      }
+
+      .accordion-body h3 {
+        font-size: 14px;
+      }
+
+      .accordion-body p {
+        font-size: 13px;
+      }
+
+      .features-list li {
+        font-size: 13px;
+        padding-left: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Section Header -->
+  <div class="section-header">
+    <h1>Section 1: Indian Curriculum Courses</h1>
+    <div class="underline"></div>
+  </div>
+
+  <!-- ICSE Chemistry Accordion -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-title">ICSE Chemistry (Grade VIII to X)</div>
+      <div class="accordion-icon">▼</div>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-body">
+        <h3>Overview:</h3>
+        <p>ICSE Chemistry offers a concept-driven, experiment-rich syllabus. It builds deep scientific thinking with a strong foundation in Atomic Structure, Chemical Reactions, Periodic Table, and Organic Chemistry.</p>
+        
+        <h3>Why Register?</h3>
+        <ul class="features-list">
+          <li>In-depth board-style notes & concept clarity</li>
+          <li>Exclusive mind maps, tests, and reaction crammers</li>
+          <li>Past board questions from 2019 to 2025 with solutions</li>
+          <li>Excellent base for Grades XI–XII and competitive exams</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CBSE Chemistry Accordion -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-title">CBSE Chemistry (Grade VIII to X)</div>
+      <div class="accordion-icon">▼</div>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-body">
+        <h3>Overview:</h3>
+        <p>Aligned with NCERT, CBSE Chemistry emphasizes logical thinking, practical application, and structured learning. Chapters are designed to prepare students for both exams and national-level competitions.</p>
+        
+        <h3>Why Register?</h3>
+        <ul class="features-list">
+          <li>NCERT-explained + board-ready answers</li>
+          <li>40+ MCQs, Assertion-Reason & Case-Based Qs per chapter</li>
+          <li>Printable notes, mind maps & previous year paper bank</li>
+          <li>Structured revision for Term 1 & Term 2</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleAccordion(header) {
+  const accordion = header.parentElement;
+  const content = accordion.querySelector('.accordion-content');
+  const icon = header.querySelector('.accordion-icon');
+  
+  // Close all other accordions
+  const allAccordions = document.querySelectorAll('.accordion');
+  allAccordions.forEach(acc => {
+    if (acc !== accordion) {
+      acc.classList.remove('active');
+    }
+  });
+  
+  // Toggle current accordion
+  accordion.classList.toggle('active');
+}
+
+// Add keyboard navigation
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && e.target.classList.contains('accordion-header')) {
+    toggleAccordion(e.target);
+  }
+});
+
+// Add ARIA attributes for accessibility
+document.addEventListener('DOMContentLoaded', function() {
+  const accordionHeaders = document.querySelectorAll('.accordion-header');
+  accordionHeaders.forEach((header, index) => {
+    header.setAttribute('tabindex', '0');
+    header.setAttribute('role', 'button');
+    header.setAttribute('aria-expanded', 'false');
+    header.setAttribute('aria-controls', `accordion-content-${index}`);
+    
+    const content = header.nextElementSibling;
+    content.setAttribute('id', `accordion-content-${index}`);
+    content.setAttribute('role', 'region');
+  });
+});
+
+// Update ARIA attributes when accordion is toggled
+const originalToggle = toggleAccordion;
+toggleAccordion = function(header) {
+  originalToggle(header);
+  const accordion = header.parentElement;
+  const isActive = accordion.classList.contains('active');
+  header.setAttribute('aria-expanded', isActive);
+};
+</script>
+
+</body>
+</html>
