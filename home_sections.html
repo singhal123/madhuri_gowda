@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Home Sections - Testimonials</title>
+  <title>Home Sections - Madhuri Gowda</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background-color: #f5f5f5;
+      color: #333;
     }
 
+    /* ---------- Testimonials Section ---------- */
     .testimonials-section {
       padding: 60px 20px;
       background-color: #ffffff;
@@ -62,16 +64,87 @@
       color: #444;
     }
 
+    /* ---------- Learn With Me Section ---------- */
+    .learn-section {
+      background: linear-gradient(135deg, #f9f9f9, #eef3ff);
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .learn-section h2 {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .learn-section .underline {
+      width: 60px;
+      height: 3px;
+      background-color: #512da8;
+      margin: 0 auto 40px;
+    }
+
+    .learn-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .learn-card {
+      background-color: #ffffff;
+      padding: 30px 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      text-align: left;
+      flex: 1 1 300px;
+      position: relative;
+    }
+
+    .learn-card h3 {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .learn-card .step-number {
+      font-size: 36px;
+      color: #512da8;
+      font-weight: bold;
+    }
+
+    .learn-card p {
+      font-size: 15px;
+      margin-bottom: 20px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .learn-card a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #512da8;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .learn-card a:hover {
+      background-color: #3b208c;
+    }
+
     @media (max-width: 768px) {
-      .testimonials-section {
-        padding: 40px 15px;
+      .testimonial-card, .learn-card {
+        flex: 1 1 100%;
       }
 
-      .testimonial-card {
-        padding: 20px;
-      }
-
-      .testimonials-section h2 {
+      .testimonials-section h2, .learn-section h2 {
         font-size: 24px;
       }
     }
@@ -79,6 +152,7 @@
 </head>
 <body>
 
+  <!-- Testimonials Section -->
   <section class="testimonials-section">
     <h2>Testimonials</h2>
     <div class="underline"></div>
@@ -100,16 +174,45 @@
       </div>
     </div>
   </section>
-<script>
-  function sendHeight() {
-    const height = document.documentElement.scrollHeight;
-    parent.postMessage({ type: 'setIframeHeight', height }, '*');
-  }
 
-  window.addEventListener('load', sendHeight);
-  window.addEventListener('resize', sendHeight);
-  setInterval(sendHeight, 1000);
-</script>
+  <!-- Learn With Me Section -->
+  <section class="learn-section">
+    <h2>Learn With Me</h2>
+    <div class="underline"></div>
+
+    <div class="learn-grid">
+      <div class="learn-card">
+        <div class="step-number">01</div>
+        <h3>Individual Courses</h3>
+        <p>Access single courses tailored to your specific needs. Choose from a wide range of focused topics designed for quick learning and mastery.</p>
+        <a href="https://madhurigowda.graphy.com/s/store" onclick="window.top.location.href=this.href; return false;">Explore</a>
+      </div>
+
+      <div class="learn-card">
+        <div class="step-number">02</div>
+        <h3>Course Bundles</h3>
+        <p>Gain a complete understanding of subjects through curated bundles. Save more while covering multiple topics thoroughly and effectively.</p>
+        <a href="#">Explore</a>
+      </div>
+
+      <div class="learn-card">
+        <div class="step-number">03</div>
+        <h3>Membership</h3>
+        <p>Get unlimited access to a wide library of courses at the most cost-effective price, ensuring you have everything you need to excel.</p>
+        <a href="https://madhurigowda.graphy.com/contactus" onclick="window.top.location.href=this.href; return false;">Register Now</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function sendHeight() {
+      const height = document.documentElement.scrollHeight;
+      parent.postMessage({ type: 'setIframeHeight', height }, '*');
+    }
+    window.addEventListener('load', sendHeight);
+    window.addEventListener('resize', sendHeight);
+    setInterval(sendHeight, 1000);
+  </script>
 
 </body>
 </html>
