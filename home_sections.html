@@ -22,7 +22,7 @@
 
     .chemistry-banner-wrapper {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       min-height: 620px;
       width: 100%;
     }
@@ -86,10 +86,11 @@
       background: linear-gradient(0deg, #613ca2, #6e7bd9);
       background-image: url('./images/home_1.jpeg');
       background-size: cover;
-      background-position: center center;
+      background-position: center;
       background-repeat: no-repeat;
+      background-attachment: scroll;
       position: relative;
-      min-height: 320px;
+      min-height: 620px;
     }
 
     .image-overlay {
@@ -99,9 +100,10 @@
       opacity: 0.1;
     }
 
-    @media (max-width: 1024px) {
+    @media (max-width: 768px) {
       .chemistry-banner-wrapper {
         flex-direction: column;
+        flex-wrap: wrap;
         min-height: auto;
       }
       
@@ -116,6 +118,8 @@
         flex: 1 1 100%;
         order: 2;
         min-height: 400px;
+        background-size: cover;
+        background-position: center;
       }
       
       .left-content {
@@ -136,13 +140,15 @@
       }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 600px) {
       .chemistry-banner-left {
         padding: 30px 20px;
       }
       
       .chemistry-banner-right {
         min-height: 300px;
+        background-size: cover;
+        background-position: center;
       }
 
       .left-content h1 {
@@ -174,6 +180,8 @@
       
       .chemistry-banner-right {
         min-height: 250px;
+        background-size: cover;
+        background-position: center;
       }
 
       .left-content h1 {
