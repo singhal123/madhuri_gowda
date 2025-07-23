@@ -381,6 +381,16 @@ window.addEventListener('DOMContentLoaded',async()=>{
   window.addEventListener('resize',()=>viewer.resize());
 });
 </script>
+<script>
+  function sendHeightToParent() {
+    const height = document.body.scrollHeight;
+    window.parent.postMessage({ type: 'setIframeHeight', height }, '*');
+  }
+
+  window.addEventListener('load', sendHeightToParent);
+  window.addEventListener('resize', sendHeightToParent);
+  setTimeout(sendHeightToParent, 500);  // Extra failsafe
+</script>
 
 </body>
 </html>
