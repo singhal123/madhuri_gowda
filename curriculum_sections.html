@@ -5,18 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Curriculum Sections - Madhuri Gowda</title>
   <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      overflow-x: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      box-sizing: border-box;
+    }
+    
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
     .curriculum-wrapper {
       display: flex;
       justify-content: center;
-      padding: 40px 20px;
-      background-color: #f5f5f5;
+      padding: 0;
+      width: 100%;
     }
 
     .curriculum-container {
       max-width: 1000px;
       width: 100%;
+      margin: 0 auto;
+      padding: 40px 20px;
     }
 
+    /* Section Backgrounds */
+    .section-indian {
+      background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      padding: 40px 20px;
+    }
+
+    .section-international {
+      background: linear-gradient(135deg, #fff3e0, #fce4ec);
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      padding: 40px 20px;
+    }
+
+    .section-competitive {
+      background: linear-gradient(135deg, #e8f5e8, #f1f8e9);
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      padding: 40px 20px;
+    }
+
+    /* Section Separator */
+    .section-separator {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ddd, transparent);
+      margin: 30px auto;
+      width: 60%;
+      border-radius: 1px;
+    }
+
+    /* Accordion Container */
+    .accordion-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0;
+      width: 100%;
+    }
+
+    /* Section Header */
     .section-header {
       text-align: center;
       margin-bottom: 50px;
@@ -31,7 +93,7 @@
       letter-spacing: 1px;
     }
 
-    .underline {
+    .section-header .underline {
       width: 100px;
       height: 4px;
       background: linear-gradient(90deg, #1976d2, #42a5f5);
@@ -39,6 +101,7 @@
       border-radius: 2px;
     }
 
+    /* Accordion Styles */
     .accordion {
       background-color: #ffffff;
       border-radius: 10px;
@@ -66,6 +129,7 @@
       font-weight: 600;
       transition: all 0.3s ease;
       position: relative;
+      overflow: hidden;
     }
 
     .accordion-header::before {
@@ -81,6 +145,10 @@
 
     .accordion-header:hover::before {
       left: 100%;
+    }
+
+    .accordion-header:hover {
+      background: linear-gradient(135deg, #5a6fd8, #6a4190);
     }
 
     .accordion-title {
@@ -153,9 +221,20 @@
       font-size: 16px;
     }
 
+    /* Responsive Design */
     @media (max-width: 768px) {
-      .curriculum-wrapper {
+      .curriculum-container {
         padding: 30px 15px;
+      }
+
+      .section-indian,
+      .section-international,
+      .section-competitive {
+        padding: 30px 15px;
+      }
+
+      .accordion-container {
+        padding: 0;
       }
 
       .section-header h1 {
@@ -186,8 +265,18 @@
     }
 
     @media (max-width: 480px) {
-      .curriculum-wrapper {
-        padding: 25px 10px;
+      .curriculum-container {
+        padding: 20px 10px;
+      }
+
+      .section-indian,
+      .section-international,
+      .section-competitive {
+        padding: 20px 10px;
+      }
+
+      .accordion-container {
+        padding: 0;
       }
 
       .section-header h1 {
@@ -221,11 +310,13 @@
       }
     }
   </style>
-
 </head>
 <body>
 
-<div class="container section-indian">
+<div class="curriculum-wrapper">
+  <div class="curriculum-container">
+
+<div class="section-indian">
   <!-- Section Header -->
   <div class="section-header">
     <h1>Section 1: Indian Curriculum Courses</h1>
@@ -349,7 +440,7 @@
 <div class="section-separator"></div>
 
 <!-- Section 2: International Curriculum Courses -->
-<div class="container section-international">
+<div class="section-international">
   <!-- Section Header -->
   <div class="section-header">
     <h1>Section 2: International Curriculum Courses</h1>
@@ -495,7 +586,7 @@
 <div class="section-separator"></div>
 
 <!-- Section 3: Competitive Exam Courses -->
-<div class="container section-competitive">
+<div class="section-competitive">
   <!-- Section Header -->
   <div class="section-header">
     <h1>Section 3: Competitive Exam Courses</h1>
@@ -568,6 +659,9 @@
       </div>
     </div>
   </div>
+
+  </div>
+</div>
 
   </div>
 </div>
