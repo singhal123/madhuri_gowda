@@ -13,6 +13,192 @@
       color: #333;
     }
 
+    /* === Banner Section === */
+    .chemistry-banner-section {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    .chemistry-banner-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 620px;
+      width: 100%;
+    }
+
+    .chemistry-banner-left {
+      flex: 1 1 40%;
+      background: linear-gradient(250deg, #38407e, #1a1a1a);
+      color: white;
+      padding: 50px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .left-content {
+      max-width: 500px;
+      text-align: left;
+    }
+
+    .left-content h1 {
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      line-height: 40px;
+      margin-bottom: 35px;
+    }
+
+    .left-content .subtitle {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 14px;
+      margin-bottom: 45px;
+    }
+
+    .left-content .chemistry-intro {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 50px;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      color: white;
+      border: 2px solid white;
+      text-decoration: none;
+      font-size: 14px;
+      text-transform: uppercase;
+      transition: 0.3s;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .contact-btn:hover {
+      background-color: white;
+      color: #1a1a1a;
+    }
+
+    .chemistry-banner-right {
+      flex: 1 1 60%;
+      background: linear-gradient(0deg, #613ca2, #6e7bd9);
+      background-image: url('./images/home_1.jpeg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      position: relative;
+      min-height: 320px;
+    }
+
+    .image-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: #000;
+      opacity: 0.1;
+    }
+
+    @media (max-width: 1024px) {
+      .chemistry-banner-wrapper {
+        flex-direction: column;
+        min-height: auto;
+      }
+      
+      .chemistry-banner-left {
+        flex: 1 1 100%;
+        order: 1;
+        padding: 40px 30px;
+        min-height: auto;
+      }
+      
+      .chemistry-banner-right {
+        flex: 1 1 100%;
+        order: 2;
+        min-height: 400px;
+      }
+      
+      .left-content {
+        max-width: 100%;
+      }
+      
+      .left-content h1 {
+        font-size: 26px;
+        line-height: 36px;
+      }
+      
+      .left-content .subtitle {
+        font-size: 13px;
+      }
+      
+      .left-content .chemistry-intro {
+        font-size: 15px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .chemistry-banner-left {
+        padding: 30px 20px;
+      }
+      
+      .chemistry-banner-right {
+        min-height: 300px;
+      }
+
+      .left-content h1 {
+        font-size: 22px;
+        line-height: 32px;
+        margin-bottom: 20px;
+      }
+
+      .left-content .subtitle {
+        font-size: 12px;
+        margin-bottom: 25px;
+      }
+      
+      .left-content .chemistry-intro {
+        font-size: 14px;
+        margin-bottom: 30px;
+      }
+      
+      .contact-btn {
+        padding: 10px 20px;
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .chemistry-banner-left {
+        padding: 25px 15px;
+      }
+      
+      .chemistry-banner-right {
+        min-height: 250px;
+      }
+
+      .left-content h1 {
+        font-size: 20px;
+        line-height: 28px;
+        margin-bottom: 15px;
+      }
+
+      .left-content .subtitle {
+        font-size: 11px;
+        margin-bottom: 20px;
+      }
+      
+      .left-content .chemistry-intro {
+        font-size: 13px;
+        line-height: 1.5;
+        margin-bottom: 25px;
+      }
+      
+      .contact-btn {
+        padding: 8px 16px;
+        font-size: 12px;
+      }
+    }
+
     /* ---------- Testimonials Section ---------- */
     .testimonials-section {
       padding: 60px 20px;
@@ -245,6 +431,28 @@
   </style>
 </head>
 <body>
+
+  <!-- Chemistry Banner Section -->
+  <section class="chemistry-banner-section">
+    <div class="chemistry-banner-wrapper">
+      <div class="chemistry-banner-left">
+        <div class="left-content">
+          <h1>Chemistry by Madhuri Gowda</h1>
+          <p class="subtitle">Expert Courses & Personalized Tutoring</p>
+          <p class="chemistry-intro">
+            With over a decade of teaching experience, I specialize in simplifying complex Chemistry concepts for students across CBSE, ICSE, IGCSE, A Level, NEET, and JEE. Whether you're struggling with reactions or aiming for top ranks, my structured, exam-focused lessons help you master the subject with clarity and confidence.
+          </p>
+          <a href="https://madhurigowda.graphy.com/contactus"
+            onclick="window.top.location.href=this.href;return false;"
+            class="contact-btn">Contact Us</a>
+        </div>
+      </div>
+
+      <div class="chemistry-banner-right">
+        <div class="image-overlay"></div>
+      </div>
+    </div>
+  </section>
 
 <!-- Testimonials -->
 <section class="testimonials-section">
