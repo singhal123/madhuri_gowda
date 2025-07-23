@@ -201,6 +201,48 @@
       .offer-col {
         width: 100%;
       }
+
+      .contact-container {
+        text-align: center;
+        padding: 0 10px;
+      }
+
+      .button-group {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+        margin: 25px 0;
+      }
+
+      .button-group a {
+        display: block;
+        margin: 0;
+        padding: 14px 28px;
+        font-size: 14px;
+        width: 80%;
+        max-width: 280px;
+        text-align: center;
+        box-sizing: border-box;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .contact-container h2 {
+        font-size: 24px;
+      }
+
+      .contact-container p {
+        font-size: 15px;
+        line-height: 1.4;
+      }
+
+      .button-group a {
+        padding: 12px 24px;
+        font-size: 13px;
+        width: 90%;
+        max-width: 250px;
+      }
     }
   </style>
 </head>
@@ -280,7 +322,7 @@
     <h2>Let’s Get in Touch</h2>
     <p>Explore the curriculum or register directly — let’s make chemistry your strength.</p>
     <div class="button-group">
-      <a href="https://madhurigowda.graphy.com/s/store" onclick="window.top.location.href=this.href; return false;">Explore Curriculum</a>
+      <a href="https://madhurigowda.graphy.com/s/pages/curriculum" onclick="window.top.location.href=this.href; return false;">Explore Curriculum</a>
       <a href="https://madhurigowda.graphy.com/contactus" onclick="window.top.location.href=this.href; return false;">Register Now</a>
     </div>
   </div>
