@@ -418,6 +418,327 @@
       }
     }
 
+    /* ---------- Our Teaching Features Section ---------- */
+    .features-section {
+      padding: 80px 20px;
+      background-color: #f8f8f8;
+      overflow: hidden;
+    }
+
+    .features-wrapper {
+      display: flex;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 60px;
+    }
+
+    .features-content {
+      flex: 1 1 55%;
+      padding-right: 20px;
+    }
+
+    .features-text h2 {
+      font-size: 38px;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    .features-underline {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      margin: 0 auto 40px;
+      border-radius: 2px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .feature-item {
+      text-align: left;
+    }
+
+    .feature-item i {
+      font-size: 32px;
+      color: #667eea;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .feature-item h3 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    .feature-item p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #555;
+      margin: 0;
+    }
+
+    .features-images {
+      flex: 1 1 45%;
+      position: relative;
+      min-height: 500px;
+    }
+
+    .image-stack {
+      position: relative;
+      width: 100%;
+      height: 26vw;
+      min-height: 400px;
+      max-height: 500px;
+    }
+
+    .floating-image {
+      position: absolute;
+      width: 23vw;
+      min-width: 200px;
+      max-width: 280px;
+      transform: perspective(200px) skewX(1deg) skewY(6deg);
+    }
+
+    .floating-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: rgba(22, 22, 22, 0.3) 2em 1em 5em;
+      transition: transform 0.3s ease;
+    }
+
+    .floating-image:hover img {
+      transform: scale(1.05);
+    }
+
+    .img-1 {
+      z-index: 100;
+      left: -10vw;
+      top: 12vw;
+      animation: float1 6s ease-in-out infinite;
+    }
+
+    .img-2 {
+      z-index: 70;
+      left: -4vw;
+      top: 8vw;
+      animation: float2 6s ease-in-out infinite 1.5s;
+    }
+
+    .img-3 {
+      z-index: 0;
+      left: 8vw;
+      top: -0.2vw;
+      animation: float3 6s ease-in-out infinite 3s;
+    }
+
+    .img-4 {
+      z-index: 50;
+      left: 2vw;
+      top: 4vw;
+      animation: float4 6s ease-in-out infinite 4.5s;
+    }
+
+    @keyframes float1 {
+      0%, 100% { transform: perspective(200px) skewX(1deg) skewY(6deg) translateY(0px) translateX(0px); }
+      50% { transform: perspective(200px) skewX(1deg) skewY(6deg) translateY(-10px) translateX(-20px); }
+    }
+
+    @keyframes float2 {
+      0%, 100% { transform: perspective(200px) skewX(1deg) skewY(6deg) translateY(0px) translateX(0px); }
+      50% { transform: perspective(200px) skewX(1deg) skewY(6deg) translateY(-15px) translateX(8px); }
+    }
+
+    @keyframes float3 {
+      0%, 100% { transform: perspective(200px) skewX(1deg) skewY(6deg) translateY(0px) translateX(0px); }
+      50% { transform: perspective(200px) skewX(1deg) skewY(6deg) translateY(-8px) translateX(15px); }
+    }
+
+    @keyframes float4 {
+      0%, 100% { transform: perspective(200px) skewX(1deg) skewY(6deg) translateY(0px) translateX(0px); }
+      50% { transform: perspective(200px) skewX(1deg) skewY(6deg) translateY(-12px) translateX(-25px); }
+    }
+
+    @media (max-width: 968px) {
+      .features-section {
+        padding: 60px 20px;
+      }
+
+      .features-wrapper {
+        flex-direction: column;
+        gap: 40px;
+        text-align: center;
+      }
+
+      .features-content {
+        padding-right: 0;
+        max-width: 600px;
+      }
+
+      .features-text h2 {
+        font-size: 32px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+      }
+
+      .feature-item {
+        text-align: center;
+      }
+
+      .features-images {
+        order: -1;
+      }
+
+      .image-stack {
+        height: 350px;
+        min-height: 350px;
+      }
+
+      .floating-image {
+        width: 30vw;
+        min-width: 140px;
+      }
+
+      .img-1 {
+        left: -8vw;
+        top: 10vw;
+      }
+
+      .img-2 {
+        left: -2vw;
+        top: 6vw;
+      }
+
+      .img-3 {
+        left: 10vw;
+        top: 1vw;
+      }
+
+      .img-4 {
+        left: 4vw;
+        top: 3vw;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .features-section {
+        padding: 50px 15px;
+      }
+
+      .features-text h2 {
+        font-size: 28px;
+        letter-spacing: 1px;
+      }
+
+      .features-grid {
+        gap: 20px;
+      }
+
+      .feature-item h3 {
+        font-size: 20px;
+      }
+
+      .feature-item p {
+        font-size: 14px;
+      }
+
+      .image-stack {
+        height: 280px;
+        min-height: 280px;
+      }
+
+      .floating-image {
+        width: 35vw;
+        min-width: 120px;
+      }
+
+      .img-1 {
+        left: -8vw;
+        top: 8vw;
+      }
+
+      .img-2 {
+        left: -2vw;
+        top: 4vw;
+      }
+
+      .img-3 {
+        left: 12vw;
+        top: 0vw;
+      }
+
+      .img-4 {
+        left: 6vw;
+        top: 2vw;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .features-section {
+        padding: 40px 10px;
+      }
+
+      .features-text h2 {
+        font-size: 24px;
+      }
+
+      .feature-item i {
+        font-size: 28px;
+      }
+
+      .feature-item h3 {
+        font-size: 18px;
+      }
+
+      .feature-item p {
+        font-size: 13px;
+      }
+
+      .image-stack {
+        height: 220px;
+        min-height: 220px;
+      }
+
+      .floating-image {
+        width: 40vw;
+        min-width: 100px;
+      }
+
+      .img-1 {
+        left: -6vw;
+        top: 6vw;
+      }
+
+      .img-2 {
+        left: -1vw;
+        top: 3vw;
+      }
+
+      .img-3 {
+        left: 10vw;
+        top: 0vw;
+      }
+
+      .img-4 {
+        left: 5vw;
+        top: 1.5vw;
+      }
+    }
+
     /* ---------- Testimonials Section ---------- */
     .testimonials-section {
       padding: 60px 20px;
@@ -1353,6 +1674,58 @@
         <a href="https://madhurigowda.graphy.com/contactus" 
            onclick="window.top.location.href=this.href; return false;" 
            class="demo-btn">Book a Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Teaching Features Section -->
+  <section class="features-section">
+    <div class="features-wrapper">
+      <div class="features-content">
+        <div class="features-text">
+          <h2>Our Teaching Features</h2>
+          <div class="features-underline"></div>
+          
+          <div class="features-grid">
+            <div class="feature-item">
+              <i class="icon ion-ios-compose-outline"></i>
+              <h3>Interactive Learning</h3>
+              <p>Engage with chemistry through hands-on experiments, visual demonstrations, and real-time problem solving sessions.</p>
+            </div>
+            <div class="feature-item">
+              <i class="icon ion-ios-gear-outline"></i>
+              <h3>Concept Mastery</h3>
+              <p>Build strong foundations with step-by-step explanations that make complex chemistry concepts crystal clear.</p>
+            </div>
+            <div class="feature-item">
+              <i class="icon ion-ios-monitor-outline"></i>
+              <h3>Exam Excellence</h3>
+              <p>Master exam techniques with targeted practice, past papers, and strategic tips for top performance in boards and competitions.</p>
+            </div>
+            <div class="feature-item">
+              <i class="icon ion-ios-heart-outline"></i>
+              <h3>Personalized Support</h3>
+              <p>Receive individual attention with customized study plans, doubt clearing sessions, and progress tracking.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="features-images">
+        <div class="image-stack">
+          <div class="floating-image img-1">
+            <img src="./images/feature_1.jpeg" alt="Chemistry Lab Experiments" />
+          </div>
+          <div class="floating-image img-2">
+            <img src="./images/feature_2.jpeg" alt="Student Learning" />
+          </div>
+          <div class="floating-image img-3">
+            <img src="./images/feature_3.jpeg" alt="Chemistry Study Materials" />
+          </div>
+          <div class="floating-image img-4">
+            <img src="./images/feature_4.jpeg" alt="Online Chemistry Classes" />
+          </div>
+        </div>
       </div>
     </div>
   </section>
