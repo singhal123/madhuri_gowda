@@ -1981,6 +1981,10 @@ window.addEventListener('DOMContentLoaded',async()=>{
       if(!m.selectedAtoms().length) throw 'bad';
       viewer.setStyle({}, {stick:{radius:0.15}});
       viewer.zoomTo();viewer.render();
+      
+      // Start automatic rotation
+      viewer.spin('y', 1); // Rotate around Y-axis at speed 1 (slow)
+      
       const counts={};
       m.selectedAtoms({}).forEach(a=>{
         const e=a.elem||a.element||a.atomic;
