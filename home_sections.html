@@ -554,6 +554,7 @@
       margin: 0 auto;
       gap: 60px;
       min-height: 400px;
+      flex-direction: row-reverse;
     }
 
     .certificate-image-container {
@@ -699,12 +700,15 @@
         margin: 0 auto;
         width: 300px;
         display: block;
+        order: 2;
       }
       
       .certificate-banner-content {
         max-width: 600px;
         margin: 0 auto;
         width: 100%;
+        padding: 0 15px;
+        order: 1;
       }
       
       .certificate-content h2 {
@@ -718,6 +722,13 @@
       
       .certificate-content p {
         font-size: 16px;
+      }
+      
+      .certificate-content .course-list {
+        margin: 25px 0;
+        padding: 20px 15px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
       }
       
       .certificate-content .quote {
@@ -742,6 +753,7 @@
         width: 280px;
         display: block;
         position: relative;
+        order: 2;
       }
 
       .certificate-image {
@@ -764,8 +776,11 @@
       }
       
       .certificate-content .course-list {
-        padding: 20px;
+        padding: 20px 10px;
         margin: 25px 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        box-sizing: border-box;
       }
 
       .certificate-content .course-list p {
@@ -775,6 +790,8 @@
       .certificate-content .course-list li {
         font-size: 14px;
         margin-bottom: 8px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
       }
       
       .certificate-content .quote {
@@ -800,6 +817,7 @@
         margin-bottom: 20px;
         width: 220px;
         margin: 0 auto 20px;
+        order: 2;
       }
 
       .certificate-image {
@@ -823,8 +841,11 @@
       }
       
       .certificate-content .course-list {
-        padding: 15px;
+        padding: 15px 8px;
         margin: 20px 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        box-sizing: border-box;
       }
 
       .certificate-content .course-list p {
@@ -834,6 +855,8 @@
       .certificate-content .course-list li {
         font-size: 13px;
         margin-bottom: 6px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
       }
       
       .certificate-content .quote {
