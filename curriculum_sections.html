@@ -8,14 +8,15 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f5f5f5;
+      background-color: transparent;
       color: #333;
-      padding: 40px 20px;
+      padding: 0;
     }
 
     .container {
-      max-width: 1000px;
-      margin: 0 auto;
+      max-width: 100%;
+      margin: 0;
+      padding: 40px 20px;
     }
 
     /* Section Header */
@@ -163,8 +164,8 @@
 
     /* Responsive Design */
     @media (max-width: 768px) {
-      body {
-        padding: 20px 15px;
+      .container {
+        padding: 30px 15px;
       }
 
       .section-header h1 {
@@ -195,8 +196,8 @@
     }
 
     @media (max-width: 480px) {
-      body {
-        padding: 15px 10px;
+      .container {
+        padding: 20px 10px;
       }
 
       .section-header h1 {
@@ -279,6 +280,72 @@
           <li>40+ MCQs, Assertion-Reason & Case-Based Qs per chapter</li>
           <li>Printable notes, mind maps & previous year paper bank</li>
           <li>Structured revision for Term 1 & Term 2</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ISC Chemistry Accordion -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-title">ISC Chemistry (Grade XI–XII)</div>
+      <div class="accordion-icon">▼</div>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-body">
+        <h3>Overview:</h3>
+        <p>ISC Chemistry is rich in theory and practicals, covering Organic, Inorganic, and Physical Chemistry. The syllabus is designed to prepare students for advanced science careers.</p>
+        
+        <h3>Why Register?</h3>
+        <ul class="features-list">
+          <li>Concept + numericals + practical integration</li>
+          <li>Board-question-focused modules</li>
+          <li>Lab work, viva help & theory explanation in tandem</li>
+          <li>Ideal for Medicine, Science, and Engineering aspirants</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CBSE Chemistry Grade XI-XII Accordion -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-title">CBSE Chemistry (Grade XI–XII)</div>
+      <div class="accordion-icon">▼</div>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-body">
+        <h3>Overview:</h3>
+        <p>CBSE's senior secondary Chemistry forms the backbone of JEE/NEET prep. With emphasis on equilibrium, redox, bonding, organic mechanisms, and numerical problem-solving.</p>
+        
+        <h3>Why Register?</h3>
+        <ul class="features-list">
+          <li>NCERT-intensive crash + full course</li>
+          <li>Doubt-solving, test discussions, previous paper analysis</li>
+          <li>Focused learning aligned to competitive standards</li>
+          <li>Chapter-wise assignments with scoring strategies</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Karnataka PUC Chemistry Accordion -->
+  <div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-title">Karnataka PUC Chemistry (I & II Year)</div>
+      <div class="accordion-icon">▼</div>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-body">
+        <h3>Overview:</h3>
+        <p>The Karnataka PUC curriculum aligns closely with CET/NEET preparation. It demands speed, accuracy, and deep conceptual understanding in Organic and Physical Chemistry.</p>
+        
+        <h3>Why Register?</h3>
+        <ul class="features-list">
+          <li>PUC + CET/NEET-integrated course</li>
+          <li>Multiple revision rounds</li>
+          <li>Notes, formulas, and problem sets</li>
+          <li>Karnataka State Board-specific approach</li>
         </ul>
       </div>
     </div>
