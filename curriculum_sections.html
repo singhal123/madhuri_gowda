@@ -402,6 +402,15 @@ toggleAccordion = function(header) {
   header.setAttribute('aria-expanded', isActive);
 };
 </script>
+<script>
+  function postHeightToParent() {
+    const height = document.body.scrollHeight;
+    window.parent.postMessage({ type: 'resizeIframe', height }, '*');
+  }
+
+  window.addEventListener('load', postHeightToParent);
+  window.addEventListener('resize', postHeightToParent);
+</script>
 
 </body>
 </html>
