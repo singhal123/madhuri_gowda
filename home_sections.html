@@ -1047,12 +1047,13 @@
 
     @media (max-width: 600px) {
       .certificate-banner-section {
-        padding: 40px 15px;
+        padding: 40px 20px;
       }
 
       .certificate-banner-wrapper {
         gap: 30px;
         min-height: auto;
+        padding: 0 10px;
       }
 
       .certificate-image-container {
@@ -1082,18 +1083,24 @@
       .certificate-content p {
         font-size: 15px;
         margin: 25px 0;
+        line-height: 1.6;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
       }
       
       .certificate-content .course-list {
-        padding: 20px 10px;
+        padding: 20px 15px;
         margin: 25px 0;
         word-wrap: break-word;
         overflow-wrap: break-word;
         box-sizing: border-box;
+        width: 100%;
       }
 
       .certificate-content .course-list p {
         font-size: 15px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
       }
 
       .certificate-content .course-list li {
@@ -1101,12 +1108,16 @@
         margin-bottom: 8px;
         word-wrap: break-word;
         overflow-wrap: break-word;
+        line-height: 1.5;
       }
       
       .certificate-content .quote {
         font-size: 16px;
-        padding: 20px;
+        padding: 20px 15px;
         margin-top: 30px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        line-height: 1.5;
       }
 
       .certificate-content .quote::before,
@@ -1117,7 +1128,11 @@
 
     @media (max-width: 480px) {
       .certificate-banner-section {
-        padding: 30px 10px;
+        padding: 30px 15px;
+      }
+
+      .certificate-banner-wrapper {
+        padding: 0 5px;
       }
 
       .certificate-image-container {
@@ -1138,6 +1153,12 @@
         border-radius: 12px;
       }
 
+      .certificate-content {
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
+      }
+
       .certificate-content h2 {
         font-size: 24px;
         margin-bottom: 15px;
@@ -1147,18 +1168,25 @@
         font-size: 14px;
         line-height: 1.6;
         margin: 20px 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
       }
       
       .certificate-content .course-list {
-        padding: 15px 8px;
+        padding: 15px 10px;
         margin: 20px 0;
         word-wrap: break-word;
         overflow-wrap: break-word;
         box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
       }
 
       .certificate-content .course-list p {
         font-size: 14px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
       }
 
       .certificate-content .course-list li {
@@ -1166,12 +1194,21 @@
         margin-bottom: 6px;
         word-wrap: break-word;
         overflow-wrap: break-word;
+        line-height: 1.4;
+        hyphens: auto;
       }
       
       .certificate-content .quote {
         font-size: 15px;
-        padding: 18px;
+        padding: 18px 12px;
         margin-top: 25px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        line-height: 1.4;
+        hyphens: auto;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
       }
 
       .certificate-content .quote::before,
