@@ -190,28 +190,50 @@ window.addEventListener('DOMContentLoaded',async()=>{
       const m=viewer.addModel(txt,'sdf');
       if(!m.selectedAtoms().length) throw 'bad';
       
-      // Add coordinate system axes
-      viewer.addLine({
-        start: {x: -2, y: 0, z: 0},
-        end: {x: 2, y: 0, z: 0}
-      }, {color: 'red', linewidth: 2, opacity: 0.6});
-      viewer.addLine({
-        start: {x: 0, y: -2, z: 0},
-        end: {x: 0, y: 2, z: 0}
-      }, {color: 'green', linewidth: 2, opacity: 0.6});
-      viewer.addLine({
-        start: {x: 0, y: 0, z: -2},
-        end: {x: 0, y: 0, z: 2}
-      }, {color: 'blue', linewidth: 2, opacity: 0.6});
+      // Get molecule bounds to position axes away from the molecule
+      const bounds = viewer.getModel().getBoundingBox();
+      const maxBound = Math.max(
+        Math.abs(bounds.max.x - bounds.min.x),
+        Math.abs(bounds.max.y - bounds.min.y),
+        Math.abs(bounds.max.z - bounds.min.z)
+      );
       
-      // Add axis labels
-      viewer.addLabel('X', {position: {x: 2.2, y: 0, z: 0}, backgroundColor: 'red', fontColor: 'white', fontSize: 12});
-      viewer.addLabel('Y', {position: {x: 0, y: 2.2, z: 0}, backgroundColor: 'green', fontColor: 'white', fontSize: 12});
-      viewer.addLabel('Z', {position: {x: 0, y: 0, z: 2.2}, backgroundColor: 'blue', fontColor: 'white', fontSize: 12});
+      // Position axes in bottom-right corner, away from molecule center
+      const axisOffset = maxBound * 0.8 + 3; // Position axes away from molecule
+      const axisLength = 1.5; // Shorter axes
+      const axisOrigin = {x: axisOffset, y: -axisOffset, z: -2}; // Bottom-right corner
+      
+      // Add coordinate system axes at bottom-right
+      viewer.addLine({
+        start: axisOrigin,
+        end: {x: axisOrigin.x + axisLength, y: axisOrigin.y, z: axisOrigin.z}
+      }, {color: 'red', linewidth: 3, opacity: 0.8});
+      viewer.addLine({
+        start: axisOrigin,
+        end: {x: axisOrigin.x, y: axisOrigin.y + axisLength, z: axisOrigin.z}
+      }, {color: 'green', linewidth: 3, opacity: 0.8});
+      viewer.addLine({
+        start: axisOrigin,
+        end: {x: axisOrigin.x, y: axisOrigin.y, z: axisOrigin.z + axisLength}
+      }, {color: 'blue', linewidth: 3, opacity: 0.8});
+      
+      // Add axis labels at the end of each axis
+      viewer.addLabel('X', {
+        position: {x: axisOrigin.x + axisLength + 0.3, y: axisOrigin.y, z: axisOrigin.z}, 
+        backgroundColor: 'red', fontColor: 'white', fontSize: 10, borderThickness: 1
+      });
+      viewer.addLabel('Y', {
+        position: {x: axisOrigin.x, y: axisOrigin.y + axisLength + 0.3, z: axisOrigin.z}, 
+        backgroundColor: 'green', fontColor: 'white', fontSize: 10, borderThickness: 1
+      });
+      viewer.addLabel('Z', {
+        position: {x: axisOrigin.x, y: axisOrigin.y, z: axisOrigin.z + axisLength + 0.3}, 
+        backgroundColor: 'blue', fontColor: 'white', fontSize: 10, borderThickness: 1
+      });
       
       viewer.setStyle({}, {stick:{radius:0.15}});
       
-      // Add bond length and angle measurements
+      // Add bond length and angle measurements positioned away from molecule center
       const atoms = m.selectedAtoms({});
       const bonds = [];
       
@@ -229,31 +251,37 @@ window.addEventListener('DOMContentLoaded',async()=>{
           if(dist < 2.0) {
             bonds.push({a1, a2, dist});
             
-            // Add bond length label (show only first 3 bonds to avoid clutter)
+            // Add bond length label positioned strategically (show only first 3 bonds)
             if(bonds.length <= 3) {
               const midX = (a1.x + a2.x) / 2;
               const midY = (a1.y + a2.y) / 2;
               const midZ = (a1.z + a2.z) / 2;
+              
+              // Offset label position to avoid overlapping with molecule
+              const offsetX = midX + (bonds.length * 0.8); // Spread labels horizontally
+              const offsetY = midY + (bonds.length * 0.5); // Slight vertical offset
+              const offsetZ = midZ + 1.5; // Move labels forward/back
+              
               viewer.addLabel(`${dist.toFixed(2)}Å`, {
-                position: {x: midX, y: midY, z: midZ},
-                backgroundColor: 'rgba(0,0,0,0.7)',
+                position: {x: offsetX, y: offsetY, z: offsetZ},
+                backgroundColor: 'rgba(0,100,200,0.8)',
                 fontColor: 'white',
-                fontSize: 10,
-                borderThickness: 0
+                fontSize: 9,
+                borderThickness: 1
               });
             }
           }
         }
       }
       
-      // Calculate and display bond angles (for molecules with 3+ atoms)
+      // Calculate and display bond angles positioned away from molecule
       if(atoms.length >= 3) {
         const centralAtoms = atoms.filter(atom => {
           const connectedBonds = bonds.filter(b => b.a1 === atom || b.a2 === atom);
           return connectedBonds.length >= 2; // Central atom must have at least 2 bonds
         });
         
-        // Show angles for first central atom only (to avoid clutter)
+        // Show angles for first central atom only
         if(centralAtoms.length > 0) {
           const central = centralAtoms[0];
           const connectedBonds = bonds.filter(b => b.a1 === central || b.a2 === central);
@@ -280,15 +308,19 @@ window.addEventListener('DOMContentLoaded',async()=>{
             const dot = v1.x*v2.x + v1.y*v2.y + v1.z*v2.z;
             const mag1 = Math.sqrt(v1.x*v1.x + v1.y*v1.y + v1.z*v1.z);
             const mag2 = Math.sqrt(v2.x*v2.x + v2.y*v2.y + v2.z*v2.z);
-            const angle = Math.acos(dot / (mag1 * mag2)) * 180 / Math.PI;
+            const angle = Math.acos(Math.max(-1, Math.min(1, dot / (mag1 * mag2)))) * 180 / Math.PI;
             
-            // Add angle label
+            // Position angle label away from molecule center
+            const labelX = central.x - 2; // Move to left side
+            const labelY = central.y + 2; // Move up
+            const labelZ = central.z + 1; // Move forward
+            
             viewer.addLabel(`∠${angle.toFixed(1)}°`, {
-              position: {x: central.x + 0.5, y: central.y + 0.5, z: central.z},
-              backgroundColor: 'rgba(138,43,226,0.8)',
+              position: {x: labelX, y: labelY, z: labelZ},
+              backgroundColor: 'rgba(138,43,226,0.9)',
               fontColor: 'white',
-              fontSize: 11,
-              borderThickness: 0
+              fontSize: 10,
+              borderThickness: 1
             });
           }
         }
