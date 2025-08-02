@@ -282,7 +282,7 @@ async function listMolFiles(){
 const base=f=>f.replace(/\.(mol|sdf)$/i,'');
 const shuffle=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
 window.addEventListener('DOMContentLoaded',async()=>{
-  const viewer=$3Dmol.createViewer('viewer',{backgroundColor:'white'});
+  const viewer=$3Dmol.createViewer('viewer',{backgroundColor:'rgba(240, 248, 255, 0.8)'});
   const files=await listMolFiles();
   if(files.length<4){alert('Need at least 4 MOL/SDF files');return;}
   const btn=document.getElementById('refresh-btn');
